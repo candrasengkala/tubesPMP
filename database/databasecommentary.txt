@@ -1,0 +1,11 @@
+1. data_dokter.csv 
+id,nama,shift_mingguan,preferensi_pagi,preferensi_siang,preferensi_malam
+Deskripsi:
+.csv ini berfungsi untuk menyimpan data_dokter terkini. data_dokter dengan kalendar_dokter dibuat terpisah untuk mempermudah pengolahan data.
+preferensi_pagi, preferensi_siang, preferensi_malam bernilai 1 bila seorang dokter ber-preferensi di jadwal tersebut. Maknanya, preferensi jadwal bisa lebih dari satu jadwal.
+
+2. kalendar.csv
+tidak ada pekan (hitung sendiri pekan berapa). Kolom dokter berisi dokter-dokter dipisahkan id.
+
+3. kalendar_dokter. 
+data yang sudah diupdate dimasukkan ke kalendar dokter.
