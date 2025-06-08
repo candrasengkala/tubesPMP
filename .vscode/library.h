@@ -11,11 +11,11 @@ Deskripsi:
 
 void jadwal_mingguan();
 /*
-Input           : kalendar.csv
+Input           : kalendar.csv, input minggu (1-5)
 Output          : jadwal dokter per minggu yang diprint
 Deskripsi:
 1. Membaca file kalendar.csv
-2. Mengurutkan data berdasarkan hari (1-7)
+2. Mengurutkan data berdasarkan hari (1-7) untuk minggu yang dipilih
 3. Untuk setiap hari, tampilkan semua shift dan dokternya
 4. Format tampilan per hari dengan header nama hari
 5. Menampilkan lengkap Senin-Minggu dalam satu tampilan
