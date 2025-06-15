@@ -1,3 +1,8 @@
 {
-    "makefile.configureOnOpen": false
+    "makefile.configureOnOpen": false,
+    "files.associations": {
+        "hellomake.h": "c",
+        "library.h": "c",
+        "datadokter.h": "c"
+    }
 }

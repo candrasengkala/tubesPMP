@@ -32,6 +32,7 @@ void baca_data_dokter(const char* nama_file, Dokter dokter[], int* jumlah_dokter
 }
 
 void generate_jadwal(Dokter dokter[], int jumlah_dokter, int jadwal[SHIFT_PER_HARI][MAX_HARI]) {
+        
 }
 
 void simpan_kalendar_csv(const char* nama_file, int jadwal[SHIFT_PER_HARI][MAX_HARI], Dokter dokter[], int jumlah_dokter) {
@@ -40,7 +41,6 @@ void simpan_kalendar_csv(const char* nama_file, int jadwal[SHIFT_PER_HARI][MAX_H
         printf("Gagal menulis ke file %s\n", nama_file);
         return;
     }
-
     fprintf(file, "hari,shift,dokter\n");
     for (int hari = 0; hari < MAX_HARI; hari++) {
         for (int shift = 0; shift < SHIFT_PER_HARI; shift++) {

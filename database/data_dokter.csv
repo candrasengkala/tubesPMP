@@ -3,4 +3,5 @@ id,nama,shift_mingguan,preferensi_pagi,preferensi_siang,preferensi_malam
 2,Jane Done,7,1,0,0
 3,Hitori Goto,7,1,1,1
 4,Yamada Ryou,7,1,1,1
-5,Raskolnikov,8,1,0,0
+5,Raskolnikov,8,1,0,1
+6,Josh Adams,10,0,1,1
