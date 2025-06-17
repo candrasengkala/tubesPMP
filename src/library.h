@@ -13,6 +13,8 @@ typedef struct {
     int jumlah_shift_per_jenis[3];          // Jumlah shift PAGI, SIANG, MALAM
     int pelanggaran;                        // Jumlah pelanggaran preferensi
     int jadwal[SHIFT_PER_HARI * MAX_HARI];  // Penandaan shift (1 jika bertugas)
+    int jumlah_preferensi;                  // Jumlah shift yang disukai (1, 2, atau 3)
+    int shift_mingguan_current;             // Shift yang sudah dijadwalkan minggu ini
 } Dokter;
 
 

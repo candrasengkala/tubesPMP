@@ -32,6 +32,145 @@ void baca_data_dokter(const char* nama_file, Dokter dokter[], int* jumlah_dokter
 }
 
 void generate_jadwal(Dokter dokter[], int jumlah_dokter, int jadwal[SHIFT_PER_HARI][MAX_HARI]) {
+    // Inisialisasi jadwal dengan 0 (tidak ada dokter yang dijadwalkan)
+    for (int shift = 0; shift < SHIFT_PER_HARI; shift++) {
+        for (int hari = 0; hari < MAX_HARI; hari++) {
+            jadwal[shift][hari] = 0; // 0 berarti tidak ada dokter yang dijadwalkan
+        }
+    }
+    
+    // Inisialisasi data dokter
+    for (int i = 0; i < jumlah_dokter; i++) {
+        dokter[i].total_shift = 0;
+        dokter[i].pelanggaran = 0;
+        dokter[i].shift_mingguan_current = 0;
+        for (int j = 0; j < 3; j++) {
+            dokter[i].jumlah_shift_per_jenis[j] = 0;
+        }
+        for (int j = 0; j < SHIFT_PER_HARI * MAX_HARI; j++) {
+            dokter[i].jadwal[j] = 0;
+        }
+        
+        //  Hitung jumlah preferensi
+        dokter[i].jumlah_preferensi = dokter[i].preferensi[PAGI] + dokter[i].preferensi[SIANG] + dokter[i].preferensi[MALAM];
+    }
+    
+    // Step 1: Isi jadwal berdasarkan preferensi dokter
+    // Prioritaskan dokter dengan preferensi yang lebih sedikit
+    for (int shift_type = PAGI; shift_type <= MALAM; shift_type++) {
+        for (int hari = 0; hari < MAX_HARI; hari++) { // Proses semua 30 hari
+            
+            // Memulai minggu baru, reset shift mingguan
+            if (hari % 7 == 0) {
+                for (int i = 0; i < jumlah_dokter; i++) {
+                    dokter[i].shift_mingguan_current = 0;
+                }
+            }
+            
+            // Prioritas pengisian dokter berdasarkan preferensi
+            // Prioritaskan dokter dengan preferensi yang lebih sedikit
+            for (int pref_priority = 1; pref_priority <= 3; pref_priority++) {
+                if (jadwal[shift_type][hari] != 0) break; // Jika shift sudah berisikan minimal 1 dokter
+                
+                int best_doctor = -1;
+                int min_shifts_this_week = 999;
+                
+                // Cari dokter yang sesuai dengan preferensi dan batas mingguan
+                for (int i = 0; i < jumlah_dokter; i++) {
+                    // Cek apakah dokter memiliki preferensi yang sesuai
+                    // Skip dokter yang tidak memiliki jumlah_preferensi sesuai dengan prioritas saat ini
+                    if (dokter[i].jumlah_preferensi != pref_priority) continue;
+                    
+                    // Cek apakah dokter memiliki preferensi untuk shift ini
+                    if (dokter[i].preferensi[shift_type] != 1) continue;
+                    
+                    // Cek apakah dokter sudah mencapai batas shift mingguan
+                    // Skip dokter yang sudah mencapai batas shift mingguan
+                    if (dokter[i].shift_mingguan_current >= dokter[i].max_shift_per_minggu) continue;
+                    
+                    // Pilih dokter dengan jumlah shift mingguan terkecil
+                    // Ini untuk memastikan dokter yang paling sedikit bertugas di minggu ini dipilih
+                    if (dokter[i].shift_mingguan_current < min_shifts_this_week) {
+                        min_shifts_this_week = dokter[i].shift_mingguan_current;
+                        best_doctor = i;
+                    }
+                }
+                
+                //  Jika ada dokter yang ditemukan sesuai dengan preferensi
+                //  Assign dokter ke jadwal
+                if (best_doctor != -1) {
+                    jadwal[shift_type][hari] = dokter[best_doctor].id;
+                    
+                    // Update data dokter tersebut
+                    int day_shift_index = shift_type * MAX_HARI + hari;
+                    dokter[best_doctor].jadwal[day_shift_index] = 1;
+                    dokter[best_doctor].total_shift++;
+                    dokter[best_doctor].jumlah_shift_per_jenis[shift_type]++;
+                    dokter[best_doctor].shift_mingguan_current++; // Increment running count for the week
+                    break; // Lanjut ke hari berikutnya setelah menemukan dokter untuk shift ini
+                }
+            }
+        }
+    }
+    
+    // Step 2: Isi jadwal untuk shift yang belum terisi (value = 0)
+    // Jika masih ada shift yang belum terisi, cari dokter yang tersedia
+    for (int shift_type = PAGI; shift_type <= MALAM; shift_type++) {
+        for (int hari = 0; hari < MAX_HARI; hari++) { //  Proses semua 30 hari
+            if (jadwal[shift_type][hari] == 0) { // Shift ini belum terisi
+                
+                // Memulai minggu baru, reset shift mingguan
+                if (hari % 7 == 0) {
+                    for (int i = 0; i < jumlah_dokter; i++) {
+                        dokter[i].shift_mingguan_current = 0;
+                        for (int d = hari; d < hari + 7 && d < MAX_HARI; d++) {
+                            for (int s = 0; s < SHIFT_PER_HARI; s++) {
+                                if (jadwal[s][d] == dokter[i].id) {
+                                    dokter[i].shift_mingguan_current++;
+                                }
+                            }
+                        }
+                    }
+                }
+                
+                int best_doctor = -1;
+                int min_current_shifts = 999;
+                
+                // Cari dokter yang tersedia (belum melebihi batas mingguan)
+                for (int i = 0; i < jumlah_dokter; i++) {
+                    // Cek apakah dokter sudah mencapai batas shift mingguan
+                    // Skip dokter yang sudah mencapai batas shift mingguan
+                    if (dokter[i].shift_mingguan_current >= dokter[i].max_shift_per_minggu) continue;
+                    
+                    // Pilih dokter dengan jumlah shift mingguan terkecil
+                    // Ini untuk memastikan dokter yang paling sedikit bertugas di minggu ini dipilih
+                    if (dokter[i].shift_mingguan_current < min_current_shifts) {
+                        min_current_shifts = dokter[i].shift_mingguan_current;
+                        best_doctor = i;
+                    }
+                }
+                
+                // Jika ada dokter yang ditemukan, assign ke jadwal
+                if (best_doctor != -1) {
+                    jadwal[shift_type][hari] = dokter[best_doctor].id;
+                    
+                    // Update data dokter tersebut
+                    int day_shift_index = shift_type * MAX_HARI + hari;
+                    dokter[best_doctor].jadwal[day_shift_index] = 1;
+                    dokter[best_doctor].total_shift++;
+                    dokter[best_doctor].jumlah_shift_per_jenis[shift_type]++;
+                    dokter[best_doctor].shift_mingguan_current++;
+                    
+                    // Cek apakah dokter tersebut melanggar preferensi
+                    // Jika dokter tidak memiliki preferensi untuk shift ini, tambahkan pelanggaran
+                    if (dokter[best_doctor].preferensi[shift_type] == 0) {
+                        dokter[best_doctor].pelanggaran++;
+                    }
+                }
+                // Kalau tidak ada dokter yang tersedia, shift ini tetap kosong
+            }
+        }
+    }
 }
 
 void simpan_kalendar_csv(const char* nama_file, int jadwal[SHIFT_PER_HARI][MAX_HARI], Dokter dokter[], int jumlah_dokter) {
