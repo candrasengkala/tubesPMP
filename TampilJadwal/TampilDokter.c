@@ -1,4 +1,4 @@
-#include "library.h"
+#include "TampilDokter.h"
 
 int baca_data_dokter(const char* filename, Dokter dokters[], int max_dokter) {
     FILE* file = fopen(filename, "r");
