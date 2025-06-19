@@ -1,5 +1,5 @@
-#ifndef LIBRARY_H
-#define LIBRARY_H
+#ifndef TampilDokter_H
+#define TampilDokter_H
 
 #include <stdio.h>
 #include <stdlib.h>
