@@ -11,9 +11,10 @@ void jadwal_perdokter();
     3. Mencari semua baris pada file yang sesuai dengan nama dokter tersebut
     4. Menampilkan semua shift, hari, dan minggu hari tersebut
     5. Format tampilan:
-    Hari:[hari], shift[shift]
+    Minggu ke: [minggu], Hari:[hari], shift[shift]
+       
     */
-const char* hari_to_hari(int hari);
+const char* tanggal_to_hari(int hari);
     /*
     ganti hari dari keterangan angka ke senin selasa dst
     */
