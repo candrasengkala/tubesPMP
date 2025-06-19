@@ -5,6 +5,5 @@
 
 void tambah_dokter();
 void hapus_dokter();
-void edit_dokter();
-void sort_dokter();
+void tampilkan_dokter();
 int generate_id();

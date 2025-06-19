@@ -1,5 +1,75 @@
 #include "DataDokter.h"
 
+void tampilkan_dokter(){
+    char line[100];
+    FILE *fptr;
+    fptr = fopen("database/data_dokter.csv", "r");
+
+    int i = 0;
+    while(fgets(line, 200, fptr) != NULL){
+        if(i == 0){
+            printf("ID               Nama             Shift Mingguan   Preferensi Pagi  Preferensi Siang Preferensi Malam \n");  
+            i += 1;
+            printf("\n");
+        }
+        else{
+            char* token;
+            token = strtok(line, ",");
+            while(token){
+                printf("%s", token);
+                for(int i = 0; i <  strlen("ID               ") - strlen(token); i++){
+                    printf(" ");
+                }
+                token = strtok(NULL, ",");
+            }
+            if (token == NULL){
+                printf("\n");
+            }
+        }
+    }
+    fclose(fptr);
+}
+
+void hapus_dokter(){
+    char buffernama[100];
+    char listdokter[100][100];
+    char line[100];
+
+    FILE *fptr;
+    fptr = fopen("database/data_dokter.csv", "r");
+    
+    printf("Nama dokter yang dihapus: ");
+    fgets(buffernama, 100, stdin);
+    buffernama[strcspn(buffernama, "\n")] = 0;
+
+    int i = 0;
+    while(fgets(line, 200, fptr) != NULL){
+        char nama_line[100];
+        char line_to_be_put[100];
+
+        strcpy(line_to_be_put, line);
+        strtok(line, ",");
+        strcpy(nama_line, strtok(NULL, ","));
+        //printf("%s %d\n", nama_line, strcmp(buffernama, nama_line));
+
+        if(strcmp(nama_line, buffernama) != 0){
+            strcpy(listdokter[i], line_to_be_put);
+            i += 1;
+        }
+    }
+    fclose(fptr);
+
+    fptr = fopen("database/data_dokter.csv", "w");
+    int baru = 0;
+    while(baru < i){
+        fprintf(fptr, listdokter[baru]);
+        baru += 1;
+    }
+    fclose(fptr);
+}
+
+
+
 int generate_id(){
     int generatedid = 0;
     FILE *fptr;
