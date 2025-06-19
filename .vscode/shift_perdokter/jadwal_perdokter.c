@@ -74,6 +74,3 @@ void jadwal_perdokter(){
     }
     fclose(kalendar);
 }
-int main (){
-    jadwal_perdokter();
-}
