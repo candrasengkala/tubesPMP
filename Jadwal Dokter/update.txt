@@ -1,0 +1,23 @@
+15/6/2025
+definisiin fungsi di library (dengan input yg disesuaikan)
+algoritma semua fungsi sudah ditulis
+
+20/6/2025
+Update debugging kode
+cara pemanggilan
+
+Dokter daftar_dokter[MAX_DOCTORS];
+JadwalEntry jadwal_kalender[MAX_JADWAL_ENTRIES];
+int total_dokter = 0;
+int total_jadwal = 0;
+
+// Load data
+total_dokter = readfile_data_dokter("data_dokter.csv", daftar_dokter, MAX_DOCTORS);
+total_jadwal = readfile_kalendar("kalendar.csv", jadwal_kalender, MAX_JADWAL_ENTRIES);
+
+if jadwal_harian
+  jadwal_harian(jadwal_kalender, total_jadwal, daftar_dokter, total_dokter);
+if jadwal_mingguan
+  jadwal_mingguan(jadwal_kalender, total_jadwal, daftar_dokter, total_dokter);
+if jadwal_bulanan
+  jadwal_bulanan(jadwal_kalender, total_jadwal, daftar_dokter, total_dokter);
