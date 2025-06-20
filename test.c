@@ -1,4 +1,6 @@
 #include "Library/DataDokter/DataDokter.h"
+#include "Library/jumlah_pelanggaran/pelanggaran.h"
+#include "Library/shift_perdokter/jadwal_perdokter.h"
 
 int main(void){
     char buffermode[100];
