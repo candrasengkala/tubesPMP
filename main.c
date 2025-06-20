@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "library.h"
+#include "src/library.h"
 
 int main() {
     Dokter daftar_dokter[MAX_DOKTER];
@@ -14,7 +14,7 @@ int main() {
 
     // 3. Simpan ke kalendar.csv dan kalendar_dokter.csv
     simpan_kalendar_csv("database/kalendar.csv", jadwal, daftar_dokter, jumlah_dokter);
-    simpan_kalendar_dokter_csv("database/kalendar_dokter.csv", daftar_dokter, jumlah_dokter);
+    simpan_kalendar_dokter_csv("database/kalender_dokter.csv", daftar_dokter, jumlah_dokter);
 
     // 4. Notifikasi selesai
     printf("Jadwal berhasil dibuat dan disimpan!\n");
