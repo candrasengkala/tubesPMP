@@ -171,6 +171,80 @@ void generate_jadwal(Dokter dokter[], int jumlah_dokter, int jadwal[SHIFT_PER_HA
             }
         }
     }
+
+    // Step 3: Tambahkan dokter tambahan ke shift yang sudah ada
+    // Prioritaskan dokter yang belum mencapai shift maksimal dan punya preferensi
+    for (int shift_type = PAGI; shift_type <= MALAM; shift_type++) {
+        for (int hari = 0; hari < MAX_HARI; hari++) {
+            
+            // Reset shift mingguan di awal minggu
+            if (hari % 7 == 0) {
+                for (int i = 0; i < jumlah_dokter; i++) {
+                    dokter[i].shift_mingguan_current = 0;
+                    // Hitung ulang shift untuk minggu ini berdasarkan jadwal yang sudah ada
+                    for (int d = hari; d < hari + 7 && d < MAX_HARI; d++) {
+                        for (int s = 0; s < SHIFT_PER_HARI; s++) {
+                            int day_shift_index = s * MAX_HARI + d;
+                            if (dokter[i].jadwal[day_shift_index] == 1) {
+                                dokter[i].shift_mingguan_current++;
+                            }
+                        }
+                    }
+                }
+            }
+            
+            // Cari dokter yang bisa ditambahkan ke shift ini
+            // Urutkan berdasarkan prioritas: yang paling sedikit shift dulu
+            int dokter_tersedia[MAX_DOKTER];
+            int jumlah_tersedia = 0;
+            
+            // Kumpulkan dokter yang memenuhi syarat
+            for (int i = 0; i < jumlah_dokter; i++) {
+                // Syarat untuk Step 3:
+                // 1. Harus punya preferensi untuk shift ini (tidak boleh pelanggaran)
+                if (dokter[i].preferensi[shift_type] != 1) continue;
+                
+                // 2. Belum mencapai batas shift mingguan
+                if (dokter[i].shift_mingguan_current >= dokter[i].max_shift_per_minggu) continue;
+                
+                // 3. Belum terjadwal di shift dan hari ini
+                int day_shift_index = shift_type * MAX_HARI + hari;
+                if (dokter[i].jadwal[day_shift_index] == 1) continue;
+                
+                dokter_tersedia[jumlah_tersedia++] = i;
+            }
+            
+            // Sorting dokter tersedia berdasarkan jumlah shift mingguan (ascending)
+            for (int i = 0; i < jumlah_tersedia - 1; i++) {
+                for (int j = i + 1; j < jumlah_tersedia; j++) {
+                    if (dokter[dokter_tersedia[i]].shift_mingguan_current > 
+                        dokter[dokter_tersedia[j]].shift_mingguan_current) {
+                        // Swap bubble sort
+                        int temp = dokter_tersedia[i];
+                        dokter_tersedia[i] = dokter_tersedia[j];
+                        dokter_tersedia[j] = temp;
+                    }
+                }
+            }
+            
+            // Tambahkan dokter ke shift (bisa lebih dari satu dokter per shift)
+            for (int idx = 0; idx < jumlah_tersedia; idx++) {
+                int i = dokter_tersedia[idx];
+                
+                // Double check kondisi karena mungkin berubah setelah assignment sebelumnya
+                if (dokter[i].shift_mingguan_current >= dokter[i].max_shift_per_minggu) continue;
+                
+                // Assign dokter ke shift ini
+                int day_shift_index = shift_type * MAX_HARI + hari;
+                dokter[i].jadwal[day_shift_index] = 1;
+                dokter[i].total_shift++;
+                dokter[i].jumlah_shift_per_jenis[shift_type]++;
+                dokter[i].shift_mingguan_current++;
+                
+                // Tidak ada pelanggaran di Step 3 karena kita sudah cek preferensi
+            }
+        }
+    }
 }
 
 void simpan_kalendar_csv(const char* nama_file, int jadwal[SHIFT_PER_HARI][MAX_HARI], Dokter dokter[], int jumlah_dokter) {
@@ -181,13 +255,24 @@ void simpan_kalendar_csv(const char* nama_file, int jadwal[SHIFT_PER_HARI][MAX_H
     }
 
     fprintf(file, "hari,shift,dokter\n");
+    
     for (int hari = 0; hari < MAX_HARI; hari++) {
         for (int shift = 0; shift < SHIFT_PER_HARI; shift++) {
             fprintf(file, "%d,%d,", hari + 1, shift + 1);
-            int id = jadwal[shift][hari];
-            if (id != -1) {
-                fprintf(file, "%d", id);
+            
+            // Cari semua dokter yang dijadwalkan di shift dan hari ini
+            int first_doctor = 1;
+            for (int i = 0; i < jumlah_dokter; i++) {
+                int day_shift_index = shift * MAX_HARI + hari;
+                if (dokter[i].jadwal[day_shift_index] == 1) {
+                    if (!first_doctor) {
+                        fprintf(file, ";"); // Separator untuk multiple dokter
+                    }
+                    fprintf(file, "%d", dokter[i].id);
+                    first_doctor = 0;
+                }
             }
+            
             fprintf(file, "\n");
         }
     }
