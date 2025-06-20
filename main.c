@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "src/library.h"
+#include "Library/JadwalGeneration/library.h"
 
 int main() {
     Dokter daftar_dokter[MAX_DOKTER];

@@ -253,7 +253,6 @@ void simpan_kalendar_csv(const char* nama_file, int jadwal[SHIFT_PER_HARI][MAX_H
         printf("Gagal menulis ke file %s\n", nama_file);
         return;
     }
-
     fprintf(file, "hari,shift,dokter\n");
     
     for (int hari = 0; hari < MAX_HARI; hari++) {
