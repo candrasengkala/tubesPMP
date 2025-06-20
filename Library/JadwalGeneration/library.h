@@ -13,6 +13,8 @@ typedef struct {
     int jumlah_shift_per_jenis[3];          // Jumlah shift PAGI, SIANG, MALAM
     int pelanggaran;                        // Jumlah pelanggaran preferensi
     int jadwal[SHIFT_PER_HARI * MAX_HARI];  // Penandaan shift (1 jika bertugas)
+    int jumlah_preferensi;                  // Jumlah shift yang disukai (1, 2, atau 3)
+    int shift_mingguan_current;             // Shift yang sudah dijadwalkan minggu ini
 } Dokter;
 
 
@@ -32,44 +34,60 @@ void baca_data_dokter(const char* nama_file, Dokter dokter[], int* jumlah_dokter
  *   - jumlah_dokter diupdate dengan jumlah dokter yang berhasil dibaca
  * 
  * Langkah kerja:
- *   1. Buka file.
- *   2. Lewati header. (misalnya "id,nama,shift_mingguan,preferensi_pagi,preferensi_siang,preferensi_malam")
- *   3. Baca tiap baris: id,nama,shift_mingguan,preferensi_pagi,preferensi_siang,preferensi_malam
- *   4. Simpan ke struct.
- *   5. Update jumlah_dokter.
- *   6. Tutup file.
+ *   1. Buka file dengan fopen().
+ *   2. Lewati header dengan fgets() pertama. (misalnya "id,nama,shift_mingguan,preferensi_pagi,preferensi_siang,preferensi_malam").
+ *   3. Loop baca setiap baris dengan fgets().
+ *   4. Parse data dengan sscanf(): id,nama,max_shift_per_minggu,preferensi_pagi,preferensi_siang,preferensi_malam ke dalam struct Dokter.
+ *   5. Inisialisasi sub-data lain: total_shift=0, pelanggaran=0, clear arrays jadwal dan jumlah_shift_per_jenis.
+ *   6. Increment jumlah_dokter.
+ *   7. Tutup file dengan fclose().
  */
 
 void generate_jadwal(Dokter dokter[], int jumlah_dokter, int jadwal[SHIFT_PER_HARI][MAX_HARI]);
 /**
  * generate_jadwal
  * ---------------
- * Menyusun jadwal otomatis berdasarkan preferensi dan batas shift mingguan.
+ * Menyusun jadwal otomatis menggunakan algoritma greedy 3-step dengan prioritas preferensi.
  * 
  * Input:
  *   - dokter[]: array dokter
  *   - jumlah_dokter: banyaknya dokter
- *   - jadwal[SHIFT_PER_HARI][MAX_HARI]: array 3d/matriks penjadwalan
+ *   - jadwal[SHIFT_PER_HARI][MAX_HARI]: array 2d/matriks penjadwalan
  * 
  * Output:
  *   - dokter[] diupdate (bagian total_shift, pelanggaran, dan jumlah_shift_per_jenis)
  *   - jadwal[][] array 3d/matriks terisi indeks dokter yang dijadwalkan
  * 
- * Langkah kerja:
- *   1. Untuk tiap hari dan shift, cari dokter yang cocok: (menggunaakn algo greedy)
- *      - Dokter belum terjadwal di hari itu
- *      - Belum melebihi batas shift mingguan (max_shift_per_minggu)
- *      - Preferensi shift sesuai (sebisanya)
- *   2. Update total shift, pelanggaran (jika terjadi), dan jenis shift.
- *   3. Simpan ID dokter ke jadwal[shift][hari].
- *   4. Jika tidak ada dokter yang cocok, tandai dengan -1. (belum tau mau diapakan, libur aja kali ya)
+ * Langkah kerja (3-step greedy algorithm):
+ *   STEP 0 - Inisialisasi:
+ *   - Reset semua jadwal ke 0, inisialisasi data dokter
+ *   - Hitung jumlah_preferensi untuk setiap dokter
+ *   
+ *   STEP 1 - Prioritas Preferensi: (Tanpa pelanggaran)
+ *   - Loop untuk setiap shift dan hari (30 hari)
+ *   - Reset shift_mingguan_current setiap awal minggu (hari % 7 == 0)
+ *   - Prioritaskan dokter berdasarkan jumlah preferensi (1->2->3)
+ *   - Pilih dokter dengan preferensi sesuai dan shift mingguan terkecil
+ *   - Update jadwal dan data dokter
+ *   
+ *   STEP 2 - Isi Shift Kosong: (Pelanggaran jika perlu)
+ *   - Cari shift yang masih kosong (jadwal == 0)
+ *   - Recalculate shift_mingguan_current setiap awal minggu
+ *   - Pilih dokter tersedia dengan shift mingguan terkecil (tanpa memperhatikan preferensi)
+ *   - Tambahkan pelanggaran jika dokter tidak punya preferensi untuk shift tersebut
+ *   
+ *   STEP 3 - Tambah Dokter ke Shift Existing: (Tanpa pelanggaran)
+ *   - Untuk setiap shift yang sudah ada dokternya
+ *   - Kumpulkan dokter yang memenuhi syarat (ada preferensi, belum max shift mingguan)
+ *   - Sort berdasarkan shift_mingguan_current (ascending)
+ *   - Assign multiple dokter ke shift yang sama jika memungkinkan
  */
 
 void simpan_kalendar_csv(const char* nama_file, int jadwal[SHIFT_PER_HARI][MAX_HARI], Dokter dokter[], int jumlah_dokter);
 /**
  * simpan_kalendar_csv
  * -------------------
- * Menulis hasil jadwal ke file kalendar.csv dengan format:
+ * Menulis hasil jadwal ke file CSV dengan format multiple dokter per shift dengan format:
  *   hari,shift,dokter_id;dokter_id;...
  * 
  * Input:
@@ -82,12 +100,13 @@ void simpan_kalendar_csv(const char* nama_file, int jadwal[SHIFT_PER_HARI][MAX_H
  *   - File CSV berisi jadwal shift dokter.
  *
  * Langkah kerja:
- *   1. Buka file untuk ditulis.
+ *   1. Buka file untuk ditulis dengan fopen()
  *   2. Tulis header: "hari,shift,dokter"
- *   3. Untuk tiap hari dan tiap shift:
- *      - Ambil ID dokter dari jadwal[shift][hari].
- *      - Jika ada dokter, tulis ke file dengan format "hari,shift,dokter_id;dokter_id;..."
- *   4. Tutup file.
+ *   3. Loop untuk setiap hari (1-30) dan shift (1-3):
+ *      - Tulis hari dan shift
+ *      - Cari semua dokter yang dijadwalkan di shift tersebut (cek dokter[i].jadwal[day_shift_index])
+ *      - Tulis ID dokter dengan separator ";" untuk multiple dokter
+ *   4. Tutup file dengan fclose()
  */
 
 void simpan_kalendar_dokter_csv(const char* nama_file, Dokter dokter[], int jumlah_dokter);
@@ -106,9 +125,9 @@ void simpan_kalendar_dokter_csv(const char* nama_file, Dokter dokter[], int juml
  *   - File CSV berisi statistik shift dokter.
  *
  * Langkah kerja:
- *   1. Buka file untuk ditulis.   
+ *   1. Buka file untuk ditulis dengan fopen()
  *   2. Tulis header: "id,jumlah_pagi,jumlah_siang,jumlah_malam,preferensi_pagi,preferensi_siang,preferensi_malam,shift_mingguan,pelanggaran"
- *   3. Untuk tiap dokter:
- *      - Tulis ID, jumlah shift pagi, siang, malam, preferensi, shift mingguan, dan pelanggaran.
- *   4. Tutup file.
+ *   3. Loop untuk setiap dokter:
+ *      - Tulis semua data: ID, jumlah shift per jenis, preferensi, max shift mingguan, dan pelanggaran
+ *   4. Tutup file dengan fclose()
  */
