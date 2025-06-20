@@ -1,3 +1,0 @@
-15/6/2025
-definisiin fungsi di library (dengan input yg disesuaikan)
-algoritma semua fungsi sudah ditulis
