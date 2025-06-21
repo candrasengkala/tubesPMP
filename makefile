@@ -2,8 +2,8 @@ CC = gcc
 LDFLAGS = -LLibrary/DataDokter -LLibrary/JadwalGeneration -LLibrary/JadwalPerWaktu -LLibrary/jumlah_pelanggaran -LLibrary/shift_perdokter
 LIBS = -lDataDokter -lJadwalGeneration -lJadwalPerWaktu -ljumlah_pelanggaran -lshift_perdokter
 
-main: test.c Library/DataDokter/libDataDokter.a Library/JadwalGeneration/libJadwalGeneration.a Library/JadwalPerWaktu/libJadwalPerWaktu.a Library/jumlah_pelanggaran/libjumlah_pelanggaran.a Library/shift_perdokter/libshift_perdokter.a
-	$(CC) test.c -o test $(LDFLAGS) $(LIBS) 
+main: main.c Library/DataDokter/libDataDokter.a Library/JadwalGeneration/libJadwalGeneration.a Library/JadwalPerWaktu/libJadwalPerWaktu.a Library/jumlah_pelanggaran/libjumlah_pelanggaran.a Library/shift_perdokter/libshift_perdokter.a
+	$(CC) main.c -o main $(LDFLAGS) $(LIBS) 
 
 Library/DataDokter/libDataDokter.a: Library/DataDokter/DataDokter.o
 	ar rcs $@ $^

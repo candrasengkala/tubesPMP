@@ -14,16 +14,20 @@ void tampilkan_dokter(){
         else{
             char* token;
             token = strtok(line, ",");
+            int col = 1; //nomor kolom, supaya space gk ada setelah new line char.
             while(token){
                 printf("%s", token);
-                for(int i = 0; i <  strlen("ID               ") - strlen(token); i++){
-                    printf(" ");
+                if(col != 6){
+                    for(int i = 0; i <  strlen("ID               ") - strlen(token); i++){
+                        printf(" ");
+                    }
                 }
                 token = strtok(NULL, ",");
+                col += 1;
             }
-            if (token == NULL){
-                printf("\n");
-            }
+            //if (token == NULL){
+            //    printf("\n");
+            //}
         }
     }
     fclose(fptr);

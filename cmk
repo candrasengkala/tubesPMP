@@ -1,0 +1,321 @@
+[33mcommit ac9796dd590cecdeaa7fbe6d069ec544f3a99d03[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m
+Author: candrasengkala <16523196@std.stei.itb.ac.id>
+Date:   Sat Jun 21 10:06:11 2025 +0700
+
+    feat: merging update baru. Tolong ganti nama struct menjadi Dokter_JadwalPerWaktu karena adanya confilct dengan struct pada fitur 2.
+
+[33mcommit 0b90b4485431a9a49f2ebe56c458fc0098ec0d17[m
+Merge: ea5c118 32c0e16
+Author: candrasengkala <16523196@std.stei.itb.ac.id>
+Date:   Sat Jun 21 10:05:27 2025 +0700
+
+    Merge branch 'main' of https://github.com/candrasengkala/tubesPMP
+
+[33mcommit ea5c1185ce0b151486523d8eac4819a042e2fdc2[m
+Author: candrasengkala <16523196@std.stei.itb.ac.id>
+Date:   Sat Jun 21 10:00:09 2025 +0700
+
+    feat: integrasi ver1 (belum mempertimbangkan estetika)
+
+[33mcommit 32c0e16dc7182f36493da82e31744c03b354446c[m
+Author: Faris Riza M <13223079@std.stei.itb.ac.id>
+Date:   Sat Jun 21 00:22:02 2025 +0700
+
+    Update jadwal_dokter.c
+
+[33mcommit 6fa7f9c2452a41e88d2313a485b33d5c5877d68c[m
+Merge: e249368 70ac2b7
+Author: Rizmi Ahmad Raihan <16523196@std.stei.itb.ac.id>
+Date:   Fri Jun 20 19:30:12 2025 +0700
+
+    Merge pull request #4 from candrasengkala/faris
+    
+    Faris
+
+[33mcommit 70ac2b791334a048f54a9368fabb46a5f3877485[m[33m ([m[1;31morigin/faris[m[33m, [m[1;32mfaris[m[33m)[m
+Merge: 4bb16bd e249368
+Author: candrasengkala <16523196@std.stei.itb.ac.id>
+Date:   Fri Jun 20 19:23:56 2025 +0700
+
+    feat: conflict resolved
+
+[33mcommit e2493684051672e2dde1cc296f4e262e5ecb90ca[m
+Merge: 262741a 37f23f2
+Author: Rizmi Ahmad Raihan <16523196@std.stei.itb.ac.id>
+Date:   Fri Jun 20 19:19:10 2025 +0700
+
+    Merge pull request #3 from candrasengkala/sigmaboi123
+    
+    Sigmaboi123
+
+[33mcommit 262741ac3bb48b800ef9fa08c0cd6fa5a57f75e2[m
+Author: candrasengkala <16523196@std.stei.itb.ac.id>
+Date:   Fri Jun 20 19:17:56 2025 +0700
+
+    feat: merging fiture two to main branch
+
+[33mcommit 37f23f2303b1dac30f0a99d3d75d2b3f02e3665d[m[33m ([m[1;31morigin/sigmaboi123[m[33m, [m[1;32msigmaboi123[m[33m)[m
+Merge: f379f27 840d12b
+Author: candrasengkala <16523196@std.stei.itb.ac.id>
+Date:   Fri Jun 20 19:14:36 2025 +0700
+
+    feat: merge conflict resolved
+
+[33mcommit 840d12b0aba8c619fb45fc77af80bbda391cf81e[m
+Author: candrasengkala <16523196@std.stei.itb.ac.id>
+Date:   Fri Jun 20 19:05:42 2025 +0700
+
+    ubah makefile
+
+[33mcommit 4bb16bd260d89a8184606cf9f6304aa23bf95c56[m
+Author: Faris Riza M <13223079@std.stei.itb.ac.id>
+Date:   Fri Jun 20 16:48:39 2025 +0700
+
+    Update and rename update.txt to update.txt
+
+[33mcommit 5902ed2f417ab1d5294388230df5d5d54dc3e60a[m
+Author: Faris Riza M <13223079@std.stei.itb.ac.id>
+Date:   Fri Jun 20 16:46:12 2025 +0700
+
+    Rename jadwal_dokter.c to jadwal_dokter.c
+
+[33mcommit 8f98ac8fc5d4279ea3eb5e48d33a71440b1c620f[m
+Author: Faris Riza M <13223079@std.stei.itb.ac.id>
+Date:   Fri Jun 20 16:45:47 2025 +0700
+
+    Update and rename TampilDokter.h to jadwal_dokter.h
+
+[33mcommit ef1b4d7c4dc9e249ae1f8fd472c90d36cac5c1e4[m
+Author: Faris Riza M <13223079@std.stei.itb.ac.id>
+Date:   Fri Jun 20 16:44:51 2025 +0700
+
+    Update and rename TampilDokter.c to jadwal_dokter.c
+
+[33mcommit f379f27ab69ff378961bf315ef9d8f08f39ebb40[m
+Author: Josh A <16523033@std.stei.itb.ac.id>
+Date:   Fri Jun 20 15:17:48 2025 +0700
+
+    docs: updated documentation for Fitur 2's progress log
+
+[33mcommit 2716276d6057b76eda50ae46b8f8611eae3efcec[m
+Author: Josh A <16523033@std.stei.itb.ac.id>
+Date:   Fri Jun 20 15:17:25 2025 +0700
+
+    feat: created code prototype for step 3 in generate_jadwal and fixed simpan_kalendar_csv's code prototype
+    
+    - created code prototype for step 3 in generate_jadwal which assign doctors with extra shifts to shifts where there's already a doctor there.
+            - fixed code prototype for simpan_kalendar_csv to print multiple doctor on one shift
+
+[33mcommit 7cc91e74989290a9954cab2c7225dee9c7edae2f[m
+Author: Josh A <16523033@std.stei.itb.ac.id>
+Date:   Fri Jun 20 15:16:04 2025 +0700
+
+    style: fixed typo and access path of library.h
+
+[33mcommit f8959992f2033872b44d58a0af10510cb494fbaf[m
+Author: Josh A <16523033@std.stei.itb.ac.id>
+Date:   Fri Jun 20 15:14:28 2025 +0700
+
+    docs: updated documentation of how the code works since there was a few tweaks added
+
+[33mcommit 95cb207d1f4d6beaa0973702f761432bedbd7354[m
+Author: candrasengkala <16523196@std.stei.itb.ac.id>
+Date:   Thu Jun 19 18:05:41 2025 +0700
+
+    fitur hapus, tambah, dan lihat data dokter serta fiturnya faiq
+
+[33mcommit 1c47b579f09e11917ea37ac117c21a281a4dc598[m
+Author: Faris Riza M <13223079@std.stei.itb.ac.id>
+Date:   Thu Jun 19 18:04:43 2025 +0700
+
+    Update and rename library.c to TampilDokter.c
+
+[33mcommit 727b8abe11a851022a22aec0b7ec6c68a9fc5bb5[m
+Author: Faris Riza M <13223079@std.stei.itb.ac.id>
+Date:   Thu Jun 19 18:03:58 2025 +0700
+
+    Rename TampilDokter.h to TampilJadwal/TampilDokter.h
+
+[33mcommit 0f4289e819c94d5626233e116d337ce527b6b921[m
+Merge: 317ac64 8dafa8a
+Author: Rizmi Ahmad Raihan <16523196@std.stei.itb.ac.id>
+Date:   Thu Jun 19 18:03:55 2025 +0700
+
+    Merge pull request #2 from candrasengkala/kerkom1
+    
+    Fitur-fitur hapus dokter dan tambah dokter dan tampilkan dokter
+
+[33mcommit 79a58b7b35c1cb56c833b726e5fed92f960303f3[m
+Author: Faris Riza M <13223079@std.stei.itb.ac.id>
+Date:   Thu Jun 19 18:03:09 2025 +0700
+
+    Update and rename TampilJadwal/library.h to TampilDokter.h
+
+[33mcommit 317ac64d94740b98cba1721bdc43e7680aba529e[m
+Merge: a3e4a53 becbc4e
+Author: Rizmi Ahmad Raihan <16523196@std.stei.itb.ac.id>
+Date:   Thu Jun 19 18:01:42 2025 +0700
+
+    Merge pull request #1 from candrasengkala/faik
+    
+    Faik
+
+[33mcommit 8dafa8a11b8ad2f268eee2b9eeff32cfe3984b78[m[33m ([m[1;31morigin/kerkom1[m[33m, [m[1;32mkerkom1[m[33m)[m
+Author: candrasengkala <16523196@std.stei.itb.ac.id>
+Date:   Thu Jun 19 17:55:00 2025 +0700
+
+    final
+
+[33mcommit becbc4e5c30025bb5b17ff62fcfae7e26a276928[m[33m ([m[1;31morigin/faik[m[33m, [m[1;32mfaik[m[33m)[m
+Author: Faiq Dzun-Naja Rahman <168202916+dzunnaja@users.noreply.github.com>
+Date:   Thu Jun 19 17:49:23 2025 +0700
+
+    Update jadwal_perdokter.h
+    
+    menyesuaikan update jadwal_perdokter.c
+
+[33mcommit 6ba43cd159a49256f463cf316ebfae9fe8f75c08[m
+Author: Faiq Dzun-Naja Rahman <168202916+dzunnaja@users.noreply.github.com>
+Date:   Thu Jun 19 17:48:33 2025 +0700
+
+    Update jadwal_perdokter.c
+    
+    penambahan tampilan minggu ke berapa
+
+[33mcommit 13901103f7b421e5fa03449a34dbf224170b46e3[m
+Author: Faiq Dzun-Naja Rahman <168202916+dzunnaja@users.noreply.github.com>
+Date:   Thu Jun 19 17:47:41 2025 +0700
+
+    Update jadwal_perdokter.c
+    
+    perbaiki format output unt menampilkan minggu ke-berapa
+
+[33mcommit 25edd6a5c4750004afbc07d5fb78e88e83136c17[m
+Author: Faiq Dzun-Naja Rahman <168202916+dzunnaja@users.noreply.github.com>
+Date:   Wed Jun 18 12:22:42 2025 +0700
+
+    Create pelanggaran.c
+
+[33mcommit 185ea4ee0b61c9a419068ce26d7f36ea815bad36[m
+Author: Faiq Dzun-Naja Rahman <168202916+dzunnaja@users.noreply.github.com>
+Date:   Wed Jun 18 12:22:13 2025 +0700
+
+    Create pelanggaran.h
+
+[33mcommit c04132902ef8c977ef3e3b7e7654a5ae65f85706[m
+Author: Faiq Dzun-Naja Rahman <168202916+dzunnaja@users.noreply.github.com>
+Date:   Wed Jun 18 05:47:15 2025 +0700
+
+    Update jadwal_perdokter.h
+
+[33mcommit d0de8325730db54ecafefa0c28387ae9118635a7[m
+Author: Josh A <16523033@std.stei.itb.ac.id>
+Date:   Tue Jun 17 19:17:16 2025 +0700
+
+    fix: changed location of main to be equal level with database to access the database
+
+[33mcommit a7c426253596e82065b1f0dac2fbd1d84c30217b[m
+Author: Josh A <16523033@std.stei.itb.ac.id>
+Date:   Tue Jun 17 19:16:41 2025 +0700
+
+    docs: create progress report documentation for the second feature
+
+[33mcommit 19154b43209bc524274acb9d6eb995317c3aff71[m
+Author: Josh A <16523033@std.stei.itb.ac.id>
+Date:   Tue Jun 17 19:16:12 2025 +0700
+
+    feat: menambahkan prototype code untuk fungsi generate_jadwal
+    
+    menambahkan prototype code untuk fungsi generate_jadwal
+    
+    menambah variabel pada struct Dokter
+
+[33mcommit 135b520e3e292c7e1656597b0e1479eb681e7159[m
+Author: candrasengkala <16523196@std.stei.itb.ac.id>
+Date:   Sun Jun 15 22:47:32 2025 +0700
+
+    progreem minggu
+
+[33mcommit c81cea09b52d35af50f9fbff06f5303fcd1336da[m
+Author: Faris Riza M <13223079@std.stei.itb.ac.id>
+Date:   Sun Jun 15 22:08:22 2025 +0700
+
+    Create update.txt
+
+[33mcommit 8f06690e18a47762c3a4e819097d212d59cc9397[m
+Author: Faris Riza M <13223079@std.stei.itb.ac.id>
+Date:   Sun Jun 15 21:51:44 2025 +0700
+
+    Create library.c
+    
+    coba dulu
+
+[33mcommit 5bccd2447a7cacd7638e5f2e62f7badd1fdfe998[m
+Author: Faris Riza M <13223079@std.stei.itb.ac.id>
+Date:   Sun Jun 15 21:50:14 2025 +0700
+
+    Create library.h
+
+[33mcommit 128c7663044416aa28c2570127800a5b83bee1cb[m
+Author: Faiq Dzun-Naja Rahman <168202916+dzunnaja@users.noreply.github.com>
+Date:   Wed Jun 11 16:50:22 2025 +0700
+
+    Create jadwal_perdokter.h
+    
+    bismillah fix
+
+[33mcommit fd97c47b9456b8d079d73467ad5124c21665a7e0[m
+Author: Faiq Dzun-Naja Rahman <168202916+dzunnaja@users.noreply.github.com>
+Date:   Wed Jun 11 16:49:43 2025 +0700
+
+    Create jadwal_perdokter.c
+    
+    bismillah fix
+
+[33mcommit 30e17d666e41ab712eb3090cadc405d3839a94e0[m
+Author: Faris Riza M <13223079@std.stei.itb.ac.id>
+Date:   Wed Jun 11 14:39:52 2025 +0700
+
+    Delete .vscode/library.h
+
+[33mcommit b9920464399e63fad7857181fe86135c2c8b3bea[m
+Author: Faiq Dzun-Naja Rahman <168202916+dzunnaja@users.noreply.github.com>
+Date:   Mon Jun 9 22:06:56 2025 +0700
+
+    pelengkapan deskripsi fungsi no.3
+
+[33mcommit b7f0fc87b05862ac66efee84695ccf09302684d2[m
+Author: Josh A <16523033@std.stei.itb.ac.id>
+Date:   Sun Jun 8 23:39:21 2025 +0700
+
+    feat : add expected input output and code prototype
+    
+    Menambahkan ekspektasi input, output, dan deskripsi dari fungsi-fungsi yang akan digunakan untuk fitur ke-2 pada library.h, dan menambahkan prototype kode untuk masing-masing fungsi pada fungsi.c
+    
+    main.c TIDAK UNTUK MASTER BRANCH, HANYA DIGUNAKAN PADA BRANCH INI
+
+[33mcommit 1a86b2efdd99fed3d32010caf37abd604a308bbd[m
+Author: Faris Riza M <13223079@std.stei.itb.ac.id>
+Date:   Sun Jun 8 21:06:56 2025 +0700
+
+    Update library.h
+
+[33mcommit f442fe278c51727e8dd4f8f51b9fe589a07858ed[m
+Author: Faris Riza M <13223079@std.stei.itb.ac.id>
+Date:   Sun Jun 8 21:04:39 2025 +0700
+
+    add library.h
+    
+    Dekomposisi fucntion yang akan digunakan
+
+[33mcommit a3e4a5320425cfa206c476e69b16ea00cba7ba88[m[33m ([m[1;32msigmaboi[m[33m, [m[1;32mremotes/origin/sigmaboi[m[33m, [m[1;32mlearningmake[m[33m)[m
+Author: candrasengkala <16523196@std.stei.itb.ac.id>
+Date:   Fri May 30 15:09:16 2025 +0700
+
+    feat: penambahan commentary
+
+[33mcommit 6d51b29589f6aa89369b2d663eb5a8c4ec1b590f[m
+Author: candrasengkala <16523196@std.stei.itb.ac.id>
+Date:   Fri May 30 14:41:55 2025 +0700
+
+    initial commit
