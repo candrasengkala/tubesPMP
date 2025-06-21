@@ -1,10 +1,10 @@
 #include "DataDokter.h"
+#include <unistd.h>
 
 void tampilkan_dokter(){
     char line[100];
     FILE *fptr;
     fptr = fopen("database/data_dokter.csv", "r");
-
     int i = 0;
     while(fgets(line, 200, fptr) != NULL){
         if(i == 0){
@@ -31,6 +31,20 @@ void tampilkan_dokter(){
         }
     }
     fclose(fptr);
+}
+
+int check_exist(char name[], FILE *fptr){
+    int returnedvalue = 0;
+    char line[100];
+    while(fgets(line, 200, fptr) != NULL){
+        char nama_line[100];
+        strtok(line, ",");
+        strcpy(nama_line, strtok(NULL, ","));
+        if (strcmp(name, nama_line) == 0){
+            returnedvalue = 1;
+        }
+    }
+    return returnedvalue;
 }
 
 void hapus_dokter(){
@@ -126,7 +140,8 @@ void tambah_dokter(){
     preferensi3 = atoi(preferensibuffer3);
 
     int genereated_id = generate_id();
-    fprintf(fptr, "%d,%s,%d,%d,%d,%d\n", genereated_id, namebuffer, shiftperweek, preferensi1, preferensi2, preferensi3);
+    (check_exist(namebuffer, fptr) != 1) ? fprintf(fptr, "%d,%s,%d,%d,%d,%d\n", genereated_id, namebuffer, shiftperweek, preferensi1, preferensi2, preferensi3) : printf("Dokter sudah ada! Hapus terlebih dahulu untuk mengubah data\n");
+    sleep(2);
     fclose(fptr);
 }
 

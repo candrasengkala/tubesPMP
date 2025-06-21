@@ -9,3 +9,4 @@ void tampilkan_dokter();
 int jumlah_dokter();
 int jumlah_kalendar();
 int generate_id();
+int check_exist(char name[], FILE *fptr);
