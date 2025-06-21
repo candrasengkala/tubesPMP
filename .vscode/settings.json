@@ -4,6 +4,7 @@
         "hellomake.h": "c",
         "library.h": "c",
         "datadokter.h": "c",
-        "jumlah_pelanggaran.h": "c"
+        "jumlah_pelanggaran.h": "c",
+        "jadwalperwaktu.h": "c"
     }
 }
