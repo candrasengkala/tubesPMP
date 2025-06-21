@@ -10,7 +10,6 @@ void tampilkan_dokter(){
         if(i == 0){
             printf("ID               Nama             Shift Mingguan   Preferensi Pagi  Preferensi Siang Preferensi Malam \n");  
             i += 1;
-            printf("\n");
         }
         else{
             char* token;
@@ -127,3 +126,26 @@ void tambah_dokter(){
     fclose(fptr);
 }
 
+int jumlah_dokter(){
+    char line[100];
+    FILE *fptr;
+    fptr = fopen("database/data_dokter.csv", "r");
+    int i = -1;
+    while(fgets(line, 200, fptr) != NULL){
+        i += 1;
+    }
+    fclose(fptr);
+    return i;
+}
+
+int jumlah_kalendar(){
+    char line[100];
+    FILE *fptr;
+    fptr = fopen("database/kalendar.csv", "r");
+    int i = -1;
+    while(fgets(line, 200, fptr) != NULL){
+        i += 1;
+    }
+    fclose(fptr);
+    return i;
+}

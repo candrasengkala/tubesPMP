@@ -1,11 +1,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "pelanggaran.h"
+#include "jumlah_pelanggaran.h"
 
 void pelanggaran_all() {
-    FILE *data_dokter = fopen("../database/data_dokter.csv", "r");
-    FILE *kalender_dokter = fopen("../database/kalender_dokter.csv", "r");
+    FILE *data_dokter = fopen("database/data_dokter.csv", "r");
+    FILE *kalender_dokter = fopen("database/kalender_dokter.csv", "r");
     if (!data_dokter || !kalender_dokter) {
         printf("Gagal membuka file.\n");
         return;
@@ -44,7 +44,7 @@ void pelanggaran_person() {
     printf("Masukkan nama dokter yang ingin dicari> ");
     fgets(nama_dokter, sizeof(nama_dokter), stdin);
     nama_dokter[strcspn(nama_dokter, "\n")] = 0;
-    FILE *data_dokter = fopen("../database/data_dokter.csv", "r");
+    FILE *data_dokter = fopen("database/data_dokter.csv", "r");
     fgets(line1, sizeof(line1), data_dokter);
     while (fgets(line1, sizeof(line1), data_dokter)) {
         line1[strcspn(line1, "\n")] = 0;
@@ -61,7 +61,7 @@ void pelanggaran_person() {
         printf("Nama dokter tidak ditemukan\n");
         return;
     }
-    FILE *kalender_dokter = fopen("../database/kalender_dokter.csv", "r");
+    FILE *kalender_dokter = fopen("database/kalender_dokter.csv", "r");
     fgets(line, sizeof(line), kalender_dokter);
     int jumlah_pelanggaran = 0;
     while (fgets(line, sizeof(line), kalender_dokter)) {

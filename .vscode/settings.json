@@ -3,6 +3,7 @@
     "files.associations": {
         "hellomake.h": "c",
         "library.h": "c",
-        "datadokter.h": "c"
+        "datadokter.h": "c",
+        "jumlah_pelanggaran.h": "c"
     }
 }

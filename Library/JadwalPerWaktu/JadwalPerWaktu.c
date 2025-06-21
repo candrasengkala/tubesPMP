@@ -1,7 +1,7 @@
-#include "jadwal_dokter.h"
+#include "JadwalPerWaktu.h"
 
 // Membaca data dokter dari file CSV
-int readfile_data_dokter(const char* filename, Dokter dokters[], int max_dokter) {
+int readfile_data_dokter(const char* filename, Dokter_JadwalPerWaktu dokters[], int max_dokter) {
     FILE* file = fopen(filename, "r");
     if (file == NULL) {
         fprintf(stderr, "File tidak bisa dibuka\n", filename);
@@ -55,7 +55,7 @@ int readfile_kalendar(const char* filename, JadwalEntry jadwal[], int max_entrie
 }
 
 // Mencari nama dokter berdasarkan ID
-const char* cari_dokter(int id, const Dokter dokters[], int jumlah_dokter) {
+const char* cari_dokter(int id, const Dokter_JadwalPerWaktu dokters[], int jumlah_dokter) {
     for (int i = 0; i < jumlah_dokter; i++) {
         if (dokters[i].id == id) {
             return dokters[i].nama;
@@ -83,11 +83,11 @@ const char* nama_shift(int shift) {
 }
 
 // Menampilkan jadwal untuk satu hari tertentu
-void tampil_jadwal_harian(int hari_ke, const JadwalEntry jadwal[], int total_jadwal, const Dokter dokters[], int total_dokter) {
+void tampil_jadwal_harian(int hari_ke, const JadwalEntry jadwal[], int total_jadwal, const Dokter_JadwalPerWaktu dokters[], int total_dokter) {
     int ditemukan = 0;
     for (int i = 0; i < total_jadwal; i++) {
         if (jadwal[i].hari == hari_ke) {
-            printf("  Shift %-6s - Dokter: ", nama_shift(jadwal[i].shift));
+            printf("  Shift %-6s - Dokter_JadwalPerWaktu: ", nama_shift(jadwal[i].shift));
             for (int j = 0; j < jadwal[i].jumlah_dokter; j++) {
                 const char* nama = cari_dokter(jadwal[i].dokter_ids[j], dokters, total_dokter);
                 printf("%s%s", nama, (j < jadwal[i].jumlah_dokter - 1) ? ", " : "");
@@ -102,7 +102,7 @@ void tampil_jadwal_harian(int hari_ke, const JadwalEntry jadwal[], int total_jad
 }
 
 // Jadwal satu hari berdasarkan input pengguna
-void jadwal_harian(const JadwalEntry jadwal[], int total_jadwal, const Dokter dokters[], int total_dokter) {
+void jadwal_harian(const JadwalEntry jadwal[], int total_jadwal, const Dokter_JadwalPerWaktu dokters[], int total_dokter) {
     int hari_input;
     printf("Masukkan hari (1-30): ");
     scanf("%d", &hari_input);
@@ -116,7 +116,7 @@ void jadwal_harian(const JadwalEntry jadwal[], int total_jadwal, const Dokter do
 }
 
 // Jadwal dalam seminggu berdasarkan minggu ke-n
-void jadwal_mingguan(const JadwalEntry jadwal[], int total_jadwal, const Dokter dokters[], int total_dokter) {
+void jadwal_mingguan(const JadwalEntry jadwal[], int total_jadwal, const Dokter_JadwalPerWaktu dokters[], int total_dokter) {
     int minggu_input;
     printf("Masukkan minggu ke (1-5): ");
     scanf("%d", &minggu_input);
@@ -136,7 +136,7 @@ void jadwal_mingguan(const JadwalEntry jadwal[], int total_jadwal, const Dokter 
 }
 
 // Menampilkan seluruh jadwal selama 30 hari
-void jadwal_bulanan(const JadwalEntry jadwal[], int total_jadwal, const Dokter dokters[], int total_dokter) {
+void jadwal_bulanan(const JadwalEntry jadwal[], int total_jadwal, const Dokter_JadwalPerWaktu dokters[], int total_dokter) {
     printf("\n=== JADWAL BULANAN ===\n");
     for (int hari_ke = 1; hari_ke <= 30; hari_ke++) {
         int minggu_ke = (hari_ke - 1) / 7 + 1;

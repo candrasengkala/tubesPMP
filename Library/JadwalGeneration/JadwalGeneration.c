@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "library.h"
+#include "JadwalGeneration.h"
 
 void baca_data_dokter(const char* nama_file, Dokter dokter[], int* jumlah_dokter) {
     FILE* file = fopen(nama_file, "r");

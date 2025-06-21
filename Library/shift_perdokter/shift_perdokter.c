@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "jadwal_perdokter.h"
+#include "shift_perdokter.h"
 const char* tanggal_to_hari (int hari){
     switch(hari) {
         case 0: return "Senin";
@@ -28,7 +28,7 @@ void jadwal_perdokter(){
     printf("Masukkan nama dokter yang ingin dicari> ");
     fgets(nama_dokter, sizeof(nama_dokter), stdin);
     nama_dokter[strcspn(nama_dokter, "\n")] = 0; // hapus newline
-    FILE *data_dokter=fopen("../database/data_dokter.csv", "r");
+    FILE *data_dokter=fopen("database/data_dokter.csv", "r");
     fgets(line1, sizeof(line1), data_dokter);//agar header tidak terbaca
     while (fgets(line1, sizeof(line1), data_dokter))
     {
@@ -48,7 +48,7 @@ void jadwal_perdokter(){
         printf("Nama dokter tidak ditemukan");
         return;
     }
-    FILE *kalendar=fopen("../database/kalendar.csv", "r");
+    FILE *kalendar=fopen("database/kalendar.csv", "r");
     fgets(line, sizeof(line), kalendar);//agar header tidak terbaca
     int minggu=0;
     while (fgets(line, sizeof(line), kalendar))

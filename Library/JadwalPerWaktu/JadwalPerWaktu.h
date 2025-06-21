@@ -7,7 +7,7 @@
 
 #define MAX_LINE 256
 #define MAX_NAME 100
-#define MAX_DOCTORS 10
+#define MAX_DOCTORS 100
 #define MAX_JADWAL_ENTRIES 100
 
 // Struktur untuk menyimpan data dokter
@@ -18,7 +18,7 @@ typedef struct {
     int preferensi_pagi;
     int preferensi_siang;
     int preferensi_malam;
-} Dokter;
+} Dokter_JadwalPerWaktu;
 
 // Struktur untuk menyimpan data jadwal
 typedef struct {
@@ -29,16 +29,16 @@ typedef struct {
 } JadwalEntry;
 
 // --- FUNGSI HELPER ---
-int readfile_data_dokter(const char* filename, Dokter dokters[], int max_dokter);
+int readfile_data_dokter(const char* filename, Dokter_JadwalPerWaktu dokters[], int max_dokter);
 int readfile_kalendar(const char* filename, JadwalEntry jadwal[], int max_entries);
-const char* cari_dokter(int id, const Dokter dokters[], int jumlah_dokter);
+const char* cari_dokter(int id, const Dokter_JadwalPerWaktu dokters[], int jumlah_dokter);
 const char* nama_hari(int hari);
 const char* nama_shift(int shift);
-void tampil_jadwal_harian(int hari_ke, const JadwalEntry jadwal[], int total_jadwal, const Dokter dokters[], int total_dokter);
+void tampil_jadwal_harian(int hari_ke, const JadwalEntry jadwal[], int total_jadwal, const Dokter_JadwalPerWaktu dokters[], int total_dokter);
 
 // --- FUNGSI UTAMA ---
-void jadwal_harian(const JadwalEntry jadwal[], int total_jadwal, const Dokter dokters[], int total_dokter);
-void jadwal_mingguan(const JadwalEntry jadwal[], int total_jadwal, const Dokter dokters[], int total_dokter);
-void jadwal_bulanan(const JadwalEntry jadwal[], int total_jadwal, const Dokter dokters[], int total_dokter);
+void jadwal_harian(const JadwalEntry jadwal[], int total_jadwal, const Dokter_JadwalPerWaktu dokters[], int total_dokter);
+void jadwal_mingguan(const JadwalEntry jadwal[], int total_jadwal, const Dokter_JadwalPerWaktu dokters[], int total_dokter);
+void jadwal_bulanan(const JadwalEntry jadwal[], int total_jadwal, const Dokter_JadwalPerWaktu dokters[], int total_dokter);
 
 #endif
