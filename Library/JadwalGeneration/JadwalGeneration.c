@@ -60,10 +60,19 @@ void generate_jadwal(Dokter dokter[], int jumlah_dokter, int jadwal[SHIFT_PER_HA
     for (int shift_type = PAGI; shift_type <= MALAM; shift_type++) {
         for (int hari = 0; hari < MAX_HARI; hari++) { // Proses semua 30 hari
             
-            // Memulai minggu baru, reset shift mingguan
-            if (hari % 7 == 0) {
-                for (int i = 0; i < jumlah_dokter; i++) {
-                    dokter[i].shift_mingguan_current = 0;
+            // Hitung shift mingguan untuk minggu berjalan
+            int minggu_mulai = (hari / 7) * 7;
+            int minggu_akhir = minggu_mulai + 7;
+            if (minggu_akhir > MAX_HARI) minggu_akhir = MAX_HARI;
+            for (int i = 0; i < jumlah_dokter; i++) {
+                dokter[i].shift_mingguan_current = 0;
+                for (int d = minggu_mulai; d < minggu_akhir; d++) {
+                    for (int s = 0; s < SHIFT_PER_HARI; s++) {
+                        int idx = s * MAX_HARI + d;
+                        if (dokter[i].jadwal[idx] == 1) {
+                            dokter[i].shift_mingguan_current++;
+                        }
+                    }
                 }
             }
             
@@ -119,15 +128,18 @@ void generate_jadwal(Dokter dokter[], int jumlah_dokter, int jadwal[SHIFT_PER_HA
         for (int hari = 0; hari < MAX_HARI; hari++) { //  Proses semua 30 hari
             if (jadwal[shift_type][hari] == 0) { // Shift ini belum terisi
                 
-                // Memulai minggu baru, reset shift mingguan
-                if (hari % 7 == 0) {
-                    for (int i = 0; i < jumlah_dokter; i++) {
-                        dokter[i].shift_mingguan_current = 0;
-                        for (int d = hari; d < hari + 7 && d < MAX_HARI; d++) {
-                            for (int s = 0; s < SHIFT_PER_HARI; s++) {
-                                if (jadwal[s][d] == dokter[i].id) {
-                                    dokter[i].shift_mingguan_current++;
-                                }
+                // Hitung shift mingguan untuk minggu berjalan
+                int minggu_mulai = (hari / 7) * 7;
+                int minggu_akhir = minggu_mulai + 7;
+                if (minggu_akhir > MAX_HARI) minggu_akhir = MAX_HARI;
+
+                for (int i = 0; i < jumlah_dokter; i++) {
+                    dokter[i].shift_mingguan_current = 0;
+                    for (int d = minggu_mulai; d < minggu_akhir; d++) {
+                        for (int s = 0; s < SHIFT_PER_HARI; s++) {
+                            int idx = s * MAX_HARI + d;
+                            if (dokter[i].jadwal[idx] == 1) {
+                                dokter[i].shift_mingguan_current++;
                             }
                         }
                     }

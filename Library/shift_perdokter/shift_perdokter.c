@@ -45,7 +45,7 @@ void jadwal_perdokter(){
     fclose(data_dokter);
     if (!found)
     {   
-        printf("Nama dokter tidak ditemukan");
+        printf("Nama dokter tidak ditemukan\n");
         return;
     }
     FILE *kalendar=fopen("database/kalendar.csv", "r");
