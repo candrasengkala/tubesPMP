@@ -19,14 +19,34 @@
 - fungsi.c:
 	- created code prototype for generate_jadwal function in C
 
-============
-20 June 2025
-============
+================
+20 June 2025 (1)
+================
 - Updated fungsi.c, main.c, and library.h
 - fungsi.c:
 	- created code prototype for step 3 in generate_jadwal which assign doctors with extra shifts to shifts where there's already a doctor there. 
 	- fixed code prototype for simpan_kalendar_csv to print multiple doctor on one shift
 - main.c:
 	- fixed access location of library.h to src/library.h
+	- fixed a typo in kalender_dokter.csv
 - library.h:
 	- updated documentation of how the code works since there was a few tweaks added
+
+================
+20 June 2025 (2)
+================
+- Merged branch sigmaboi123 with main branch
+- Renamed fungsi.c to JadwalGeneration.c and library.h to JadwalGeneration.h
+
+============
+21 June 2025
+============
+- Created branch bug&debug
+- Updated JadwalGeneration.c
+- JadwalGeneration.c:
+	- Changed algorithm to update the max_shift_mingguan for each doctor to prevent overworking of the doctors
+
+============
+22 June 2025
+============
+- Merged branch bug&debug with main branch
