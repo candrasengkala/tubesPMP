@@ -10,3 +10,4 @@ int jumlah_dokter();
 int jumlah_kalendar();
 int generate_id();
 int check_exist(char name[], FILE *fptr);
+int check_name_empty(char name[]);

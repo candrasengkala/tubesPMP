@@ -1,6 +1,6 @@
 id,nama,shift_mingguan,preferensi_pagi,preferensi_siang,preferensi_malam
-1,Josh Adams,2,1,0,0
-2,Mervin Hutabarat,10,1,1,1
-3,Abu Bakar,10,1,0,0
-4,Uthman,5,1,1,0
-5,Junaedi,3,1,1,1
+1,John Doe,4,1,0,1
+2,Jane Done,3,1,0,0
+3,Hitori Goto,7,1,1,0
+4,Yamada Ryou,3,1,1,0
+5,Raskolnikov,4,1,0,0
