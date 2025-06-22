@@ -1,6 +1,3 @@
-#if !defined(pelanggaran_dokter)
-#define pelanggaran_dokter
-
 void pelanggaran_all();
     /*
     Input       : kalender_dokter.csv, data_dokter.csv
@@ -25,4 +22,3 @@ void pelanggaran_person();
     4. Menampilkan data pelanggaran shift milik dokter tersebut.
 */
 
-#endif // pelanggaran

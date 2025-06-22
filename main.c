@@ -6,7 +6,6 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <unistd.h>
-
 #define PATH_DOKTER "database/data_dokter.csv"
 #define PATH_KALENDAR "database/kalendar.csv"
 int main(void){
@@ -94,21 +93,12 @@ int main(void){
                 int panjang_dokter = jumlah_dokter();
                 if(mode == 'h'){
                     jadwal_harian(data_jadwal, panjang_kalendar, data_dokter, panjang_dokter);
-                    printf("Press any key to escape\n");
-                    getchar();
-                    break;
                 }
                 else if(mode == 'm'){
                     jadwal_mingguan(data_jadwal, panjang_kalendar, data_dokter, panjang_dokter);
-                    printf("Press any key to escape\n");
-                    getchar();
-                    break;
                 }
                 else if(mode == 'b'){
                     jadwal_bulanan(data_jadwal, panjang_kalendar, data_dokter, panjang_dokter);
-                    printf("Press any key to escape\n");
-                    getchar();
-                    break;
                 }
                 else if(mode == 'e'){
                     break;
