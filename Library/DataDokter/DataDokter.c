@@ -3,7 +3,7 @@
 #include <string.h>
 
 int check_name_empty(char name[]){
-    if(strlen(name) == 0){
+    if(strlen(name) != 0){
         return 1;
     }
     return 0;
@@ -17,7 +17,9 @@ int number_validity(int num){
 }
 
 int shift_validity(int num){
-    if (num >= 0) return 1; //shift nol dianggap valid karena kalau alokasinya nol berarti gak mau kerja sama sekali.
+    if (num >= 0){
+        return 1; //shift nol dianggap valid karena kalau alokasinya nol berarti gak mau kerja sama sekali.
+    } 
     return 0;
 }
 
@@ -45,23 +47,20 @@ void tampilkan_dokter(){
                 token = strtok(NULL, ",");
                 col += 1;
             }
-            //if (token == NULL){
-            //    printf("\n");
-            //}
         }
     }
     fclose(fptr);
 }
 
 int check_exist(char name[], FILE *fptr){
-    int returnedvalue = 0;
+    int returnedvalue = 1;
     char line[100];
     while(fgets(line, 200, fptr) != NULL){
         char nama_line[100];
         strtok(line, ",");
         strcpy(nama_line, strtok(NULL, ","));
         if (strcmp(name, nama_line) == 0){
-            returnedvalue = 1;
+            returnedvalue = 0;
         }
     }
     return returnedvalue;
@@ -87,7 +86,6 @@ void hapus_dokter(){
         strcpy(line_to_be_put, line);
         strtok(line, ",");
         strcpy(nama_line, strtok(NULL, ","));
-        //printf("%s %d\n", nama_line, strcmp(buffernama, nama_line));
 
         if(strcmp(nama_line, buffernama) != 0){
             strcpy(listdokter[i], line_to_be_put);
@@ -162,7 +160,7 @@ void tambah_dokter(){
     int genereated_id = generate_id();
     int add_truth = 0; 
 
-    (check_name_empty(namebuffer) && check_exist(namebuffer, fptr) && shift_validity(shiftperweek) && number_validity(preferensi1) && number_validity(preferensi2) && number_validity(preferensi3))? fprintf(fptr, "%d,%s,%d,%d,%d,%d\n", genereated_id, namebuffer, shiftperweek, preferensi1, preferensi2, preferensi3) : printf("Input invalid atau nama sudah ada!\n");
+    ((check_name_empty(namebuffer) == 1) && (check_exist(namebuffer, fptr) == 1) && (shift_validity(shiftperweek) == 1) && (number_validity(preferensi1) == 1) && (number_validity(preferensi2) == 1) && (number_validity(preferensi3) == 1))? fprintf(fptr, "%d,%s,%d,%d,%d,%d\n", genereated_id, namebuffer, shiftperweek, preferensi1, preferensi2, preferensi3) : printf("Input invalid atau nama sudah ada!\n");
     sleep(2);
     fclose(fptr);
 }

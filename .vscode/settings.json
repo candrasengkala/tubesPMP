@@ -18,6 +18,7 @@
         "xmemory": "c",
         "xstring": "c",
         "xtr1common": "c",
-        "xutility": "c"
+        "xutility": "c",
+        "stdio.h": "c"
     }
 }
