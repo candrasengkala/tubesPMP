@@ -1,5 +1,25 @@
 #include "DataDokter.h"
 #include <unistd.h>
+#include <string.h>
+
+int check_name_empty(char name[]){
+    if(strlen(name) == 0){
+        return 1;
+    }
+    return 0;
+}
+
+int number_validity(int num){
+    if ((num == 1) || (num == 0)){
+        return 1;
+    }
+    return 0;
+}
+
+int shift_validity(int num){
+    if (num >= 0) return 1; //shift nol dianggap valid karena kalau alokasinya nol berarti gak mau kerja sama sekali.
+    return 0;
+}
 
 void tampilkan_dokter(){
     char line[100];
@@ -140,7 +160,9 @@ void tambah_dokter(){
     preferensi3 = atoi(preferensibuffer3);
 
     int genereated_id = generate_id();
-    (check_exist(namebuffer, fptr) != 1) ? fprintf(fptr, "%d,%s,%d,%d,%d,%d\n", genereated_id, namebuffer, shiftperweek, preferensi1, preferensi2, preferensi3) : printf("Dokter sudah ada! Hapus terlebih dahulu untuk mengubah data\n");
+    int add_truth = 0; 
+
+    (check_name_empty(namebuffer) && check_exist(namebuffer, fptr) && shift_validity(shiftperweek) && number_validity(preferensi1) && number_validity(preferensi2) && number_validity(preferensi3))? fprintf(fptr, "%d,%s,%d,%d,%d,%d\n", genereated_id, namebuffer, shiftperweek, preferensi1, preferensi2, preferensi3) : printf("Input invalid atau nama sudah ada!\n");
     sleep(2);
     fclose(fptr);
 }

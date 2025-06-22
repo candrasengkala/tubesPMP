@@ -11,3 +11,4 @@ int jumlah_kalendar();
 int generate_id();
 int check_exist(char name[], FILE *fptr);
 int check_name_empty(char name[]);
+int number_validity(int num);

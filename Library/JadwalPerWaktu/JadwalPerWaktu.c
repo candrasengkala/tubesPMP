@@ -113,7 +113,7 @@ void tampil_jadwal_harian(int hari_ke, const JadwalEntry jadwal[], int total_jad
     for (int i = 0; i < total_jadwal; ++i) {
         if (jadwal[i].hari == hari_ke) {
             // Kita menemukan entri jadwal untuk hari yang diminta!
-            printf("  Shift %-6s - Dokter_JadwalPerWaktu: ", nama_shift(jadwal[i].shift));
+            printf("  Shift %-6s - Dokter: ", nama_shift(jadwal[i].shift));
             for (int j = 0; j < jadwal[i].jumlah_dokter; ++j) {
                 // Cari nama dokter berdasarkan ID dan tampilkan
                 const char* doctorName = cari_dokter(jadwal[i].dokter_ids[j], dokters, total_dokter);

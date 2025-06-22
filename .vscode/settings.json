@@ -5,6 +5,19 @@
         "library.h": "c",
         "datadokter.h": "c",
         "jumlah_pelanggaran.h": "c",
-        "jadwalperwaktu.h": "c"
+        "jadwalperwaktu.h": "c",
+        "compare": "c",
+        "concepts": "c",
+        "exception": "c",
+        "iosfwd": "c",
+        "limits": "c",
+        "string": "c",
+        "tuple": "c",
+        "type_traits": "c",
+        "utility": "c",
+        "xmemory": "c",
+        "xstring": "c",
+        "xtr1common": "c",
+        "xutility": "c"
     }
 }
