@@ -69,8 +69,8 @@ void generate_jadwal(Dokter dokter[], int jumlah_dokter, int jadwal[SHIFT_PER_HA
                 for (int d = minggu_mulai; d < minggu_akhir; d++) {
                     for (int s = 0; s < SHIFT_PER_HARI; s++) {
                         int idx = s * MAX_HARI + d;
-                        if (dokter[i].jadwal[idx] == 1) {
-                            dokter[i].shift_mingguan_current++;
+                        if (dokter[i].jadwal[idx] == 1) { //kalau udah pernah ngambil
+                            dokter[i].shift_mingguan_current++; //shift_mingguan_current ditambah karena dokternya sudah pernah di-assign.
                         }
                     }
                 }
@@ -112,7 +112,7 @@ void generate_jadwal(Dokter dokter[], int jumlah_dokter, int jadwal[SHIFT_PER_HA
                     
                     // Update data dokter tersebut
                     int day_shift_index = shift_type * MAX_HARI + hari;
-                    dokter[best_doctor].jadwal[day_shift_index] = 1;
+                    dokter[best_doctor].jadwal[day_shift_index] = 1; //
                     dokter[best_doctor].total_shift++;
                     dokter[best_doctor].jumlah_shift_per_jenis[shift_type]++;
                     dokter[best_doctor].shift_mingguan_current++; // Increment running count for the week
@@ -139,7 +139,7 @@ void generate_jadwal(Dokter dokter[], int jumlah_dokter, int jadwal[SHIFT_PER_HA
                         for (int s = 0; s < SHIFT_PER_HARI; s++) {
                             int idx = s * MAX_HARI + d;
                             if (dokter[i].jadwal[idx] == 1) {
-                                dokter[i].shift_mingguan_current++;
+                                dokter[i].shift_mingguan_current++; //untuk mengetahui di minggu tersebut *sudah berapa shift*
                             }
                         }
                     }

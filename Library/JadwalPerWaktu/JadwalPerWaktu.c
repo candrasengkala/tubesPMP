@@ -135,11 +135,13 @@ void tampil_jadwal_harian(int hari_ke, const JadwalEntry jadwal[], int total_jad
 void jadwal_harian(const JadwalEntry jadwal[], int total_jadwal, const Dokter_JadwalPerWaktu dokters[], int total_dokter) {
     int requestedDay;
     printf("Mau lihat jadwal hari ke berapa (1-30)? ");
-    if (scanf("%d", &requestedDay) != 1) {
+    char buffer[100];
+    fgets(buffer, 100, stdin);
+    requestedDay = atoi(buffer);
+    if (requestedDay == 0) {
         // Penanganan error kalau inputnya bukan angka
         printf("Input tidak valid. Mohon masukkan angka hari yang benar.\n");
         // Hapus sisa buffer input untuk mencegah masalah di scanf berikutnya
-        while (getchar() != '\n');
         return;
     }
     if (requestedDay < 1 || requestedDay > 30) {
@@ -155,9 +157,11 @@ void jadwal_harian(const JadwalEntry jadwal[], int total_jadwal, const Dokter_Ja
 void jadwal_mingguan(const JadwalEntry jadwal[], int total_jadwal, const Dokter_JadwalPerWaktu dokters[], int total_dokter) {
     int requestedWeek;
     printf("Mau lihat jadwal minggu ke berapa (1-5)? ");
-    if (scanf("%d", &requestedWeek) != 1) {
+    char buffer[100];
+    fgets(buffer, 100, stdin);
+    requestedWeek = atoi(buffer);
+    if (requestedWeek == 0) {
         printf("Input tidak valid. Mohon masukkan angka minggu yang benar.\n");
-        while (getchar() != '\n');
         return;
     }
     if (requestedWeek < 1 || requestedWeek > 5) {

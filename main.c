@@ -54,7 +54,7 @@ int main(void){
         else if(mode == 'p'){    
             char buffermode[100];
             for(;;){
-                printf("Input Lihat Pelanggaran: \nPelanggaran Perdokter [d]\nPelanggaran Keseluruhan[k]\nExit[e]\n");
+                printf("Input Lihat Pelanggaran: \nPelanggaran Perdokter [d]\nPelanggaran Keseluruhan[k]\nExit[e]\n>");
                 fgets(buffermode, 5, stdin);
                 char mode = buffermode[0];
                 if(mode == 'd'){
@@ -81,7 +81,7 @@ int main(void){
         }
         else if(mode == 'j'){
             for(;;){
-                printf("Lihat Jadwal: \nJadwal Per-Bulan [b]\nJadwal Per-Minggu[m]\nJadwal Per-Hari[h]\nExit[e]\n");
+                printf("Lihat Jadwal: \nJadwal Per-Bulan [b]\nJadwal Per-Minggu[m]\nJadwal Per-Hari[h]\nExit[e]\n>");
                 fgets(buffermode, 5, stdin);
                 char mode = buffermode[0];
 
