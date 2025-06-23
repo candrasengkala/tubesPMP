@@ -4,16 +4,16 @@
 #include "JadwalGeneration.h"
 
 void baca_data_dokter(const char* nama_file, Dokter dokter[], int* jumlah_dokter) {
-    FILE* file = fopen(nama_file, "r");
+    FILE* file = fopen(nama_file, "r");    // buka file dengan mode r (read)
     if (!file) {
         printf("Gagal membuka file %s\n", nama_file);
         return;
     }
 
     char baris[200];
-    fgets(baris, sizeof(baris), file); // Lewati header
+    fgets(baris, sizeof(baris), file);    // Lewati header
 
-    *jumlah_dokter = 0;
+    *jumlah_dokter = 0;                    
     while (fgets(baris, sizeof(baris), file)) {
         Dokter* d = &dokter[*jumlah_dokter];
         sscanf(baris, "%d,%49[^,],%d,%d,%d,%d",
@@ -25,7 +25,7 @@ void baca_data_dokter(const char* nama_file, Dokter dokter[], int* jumlah_dokter
         memset(d->jumlah_shift_per_jenis, 0, sizeof(d->jumlah_shift_per_jenis));
         memset(d->jadwal, 0, sizeof(d->jadwal));
 
-        (*jumlah_dokter)++;
+        (*jumlah_dokter)++;                // increment
     }
 
     fclose(file);
@@ -93,12 +93,11 @@ void generate_jadwal(Dokter dokter[], int jumlah_dokter, int jadwal[SHIFT_PER_HA
                     // Cek apakah dokter memiliki preferensi untuk shift ini
                     if (dokter[i].preferensi[shift_type] != 1) continue;
                     
-                    // Cek apakah dokter sudah mencapai batas shift mingguan
-                    // Skip dokter yang sudah mencapai batas shift mingguan
+                    // Cek apakah dokter sudah mencapai batas shift mingguan dan skip dokter yang sudah melewati batas mingguan
                     if (dokter[i].shift_mingguan_current >= dokter[i].max_shift_per_minggu) continue;
                     
                     // Pilih dokter dengan jumlah shift mingguan terkecil
-                    // Ini untuk memastikan dokter yang paling sedikit bertugas di minggu ini dipilih
+                    // Memastikan algoritma memilih dokter yang paling sedikit bertugas di minggu ini )
                     if (dokter[i].shift_mingguan_current < min_shifts_this_week) {
                         min_shifts_this_week = dokter[i].shift_mingguan_current;
                         best_doctor = i;
@@ -213,6 +212,7 @@ void generate_jadwal(Dokter dokter[], int jumlah_dokter, int jadwal[SHIFT_PER_HA
             // Kumpulkan dokter yang memenuhi syarat
             for (int i = 0; i < jumlah_dokter; i++) {
                 // Syarat untuk Step 3:
+
                 // 1. Harus punya preferensi untuk shift ini (tidak boleh pelanggaran)
                 if (dokter[i].preferensi[shift_type] != 1) continue;
                 
@@ -243,7 +243,7 @@ void generate_jadwal(Dokter dokter[], int jumlah_dokter, int jadwal[SHIFT_PER_HA
             for (int idx = 0; idx < jumlah_tersedia; idx++) {
                 int i = dokter_tersedia[idx];
                 
-                // Double check kondisi karena mungkin berubah setelah assignment sebelumnya
+                // Re-check kondisi (dapat berubah setelah assignment sebelumnya)
                 if (dokter[i].shift_mingguan_current >= dokter[i].max_shift_per_minggu) continue;
                 
                 // Assign dokter ke shift ini
@@ -260,7 +260,7 @@ void generate_jadwal(Dokter dokter[], int jumlah_dokter, int jadwal[SHIFT_PER_HA
 }
 
 void simpan_kalendar_csv(const char* nama_file, int jadwal[SHIFT_PER_HARI][MAX_HARI], Dokter dokter[], int jumlah_dokter) {
-    FILE* file = fopen(nama_file, "w");
+    FILE* file = fopen(nama_file, "w");    // buka file dengan mode w (write)
     if (!file) {
         printf("Gagal menulis ke file %s\n", nama_file);
         return;
@@ -292,7 +292,7 @@ void simpan_kalendar_csv(const char* nama_file, int jadwal[SHIFT_PER_HARI][MAX_H
 }
 
 void simpan_kalendar_dokter_csv(const char* nama_file, Dokter dokter[], int jumlah_dokter) {
-    FILE* file = fopen(nama_file, "w");
+    FILE* file = fopen(nama_file, "w");    // buka file dengan mode w (write)
     if (!file) {
         printf("Gagal menulis ke file %s\n", nama_file);
         return;
