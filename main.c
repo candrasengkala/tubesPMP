@@ -42,7 +42,7 @@ int main(void){
         }
         else if(mode == 'g'){
             Dokter daftar_dokter[MAX_DOKTER];
-            int jumlahdokter = jumlah_dokter();
+            int jumlahdokter = 100;//jumlah_dokter();
             int jadwal[SHIFT_PER_HARI][MAX_HARI];
             baca_data_dokter("database/data_dokter.csv", daftar_dokter, &jumlahdokter);
             generate_jadwal(daftar_dokter, jumlahdokter, jadwal);
@@ -89,8 +89,8 @@ int main(void){
                 JadwalEntry data_jadwal[MAX_JADWAL_ENTRIES];
                 readfile_data_dokter("database/data_dokter.csv", data_dokter, MAX_DOCTORS);
                 readfile_kalendar("database/kalendar.csv", data_jadwal, MAX_JADWAL_ENTRIES);
-                int panjang_kalendar = jumlah_kalendar();
-                int panjang_dokter = jumlah_dokter();
+                int panjang_kalendar = 100;//jumlah_kalendar();
+                int panjang_dokter = 100;//jumlah_dokter();
                 if(mode == 'h'){
                     jadwal_harian(data_jadwal, panjang_kalendar, data_dokter, panjang_dokter);
                 }

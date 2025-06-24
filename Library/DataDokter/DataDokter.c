@@ -38,8 +38,6 @@ void tampilkan_dokter(){
     FILE *fptr;
     fptr = fopen("database/data_dokter.csv", "r");
     int i = 0;
-    printf("a");
-    printf("%d\n", _longest_name);
     while(fgets(line, 200, fptr) != NULL){
         if(i == 0){
            printf("%s %*s %s %*s %s %*s %s %*s %s %*s %s %*s\n", 
